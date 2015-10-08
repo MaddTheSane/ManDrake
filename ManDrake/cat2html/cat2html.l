@@ -16,11 +16,6 @@
 
     #include <string.h>
     
-    #ifdef yywrap
-    #undef yywrap
-    #endif
-    #define yywrap() (1)
-
     #define BOLDFLAG    1
     #define ULINEFLAG    2
 
@@ -45,10 +40,11 @@
     int markHeaders = 0;
 
     /* Decode a UTF8 sequence to return the unicode number */
-    unsigned decodeUTF8(unsigned char *buf, int len)
+    unsigned decodeUTF8(unsigned char *buf, yy_size_t len);
+    unsigned decodeUTF8(unsigned char *buf, yy_size_t len)
     {
         int n = buf[0] & (0x7f >> len);
-        int i;
+        yy_size_t i;
 
         for (i=1; i<len; i++)
             n = (n << 6) | (buf[i] & 0x3f);
@@ -56,6 +52,7 @@
         return (unsigned)n;
     }
 
+    void emitPreamble(void);
     void emitPreamble(void)
     {
         /* Explicitly set Courier font so that bold/italic attributes are
@@ -65,14 +62,16 @@
            is lost forever. */
         fputs("<html><head></head><body><pre><font face=\"Courier\">",stdout);
     }
-    
+
+    void emitPostamble(void);
     void emitPostamble(void)
     {
         fputs("</font></pre>\n</body></html>",stdout);
     }
 
     #define adjust() if( neededflags!=flags ) _adjust()
-    
+
+    void _adjust(void);
     void _adjust(void) {
     
         if( (flags^neededflags)&ULINEFLAG )
@@ -87,7 +86,8 @@
     static int lineCount = 0;
     static int maxLineCount = 3;
 
-    void emitChar(int ch) {        
+    void emitChar(int ch);
+    void emitChar(int ch) {
         adjust();
 
         if (ch=='\n') {
@@ -105,6 +105,7 @@
         }
     }
 
+    void emitString(char *string);
     void emitString(char *string)
     {
         int i, len=strlen(string);
@@ -112,6 +113,7 @@
             emitChar(string[i]);
     }
 
+    void emitRaw(char *string);
     void emitRaw(char *string)
     {
         adjust();
@@ -119,7 +121,8 @@
         fputs(string,stdout);
     }
 
-    void emitBackspacedLetters(char *charblock, int lengthLeft, int doBold)
+    void emitBackspacedLetters(char *charblock, yy_size_t lengthLeft, int doBold);
+    void emitBackspacedLetters(char *charblock, yy_size_t lengthLeft, int doBold)
     {
         /* If there's a trailing backspace, then both letters are deleted, so print nothing */
         if (lengthLeft >= 4 && charblock[3] == '\010')
@@ -140,7 +143,8 @@
         }
     }
 
-    void emitBackspacedText(char *text, int length)
+    void emitBackspacedText(char *text, yy_size_t length);
+    void emitBackspacedText(char *text, yy_size_t length)
     {
         int i=0;
         while (i < length) {
@@ -156,6 +160,7 @@
     }
 
     /* Use hexidecimal entities */
+    void emitUnicode(unsigned charNum);
     void emitUnicode(unsigned charNum)
     {
         char entityBuf[20];
@@ -176,6 +181,7 @@ UTF8CONT     [\x80-\xBF]
 UTF8SEQ      {UTF8START}({UTF8CONT}{1,3})
 
 %option debug
+%option noyywrap
 
 %x FIRSTLINE
 
@@ -327,7 +333,8 @@ _\010{ALLBUTUL}        {
 
 %%
 
-void usage() {
+void usage(void);
+void usage(void) {
 
     fprintf(stderr,"Usage: cat2html [-il] [<filename>]\n"
         "\tTranslate output of (g)nroff to HTML. If no\n"
@@ -338,7 +345,7 @@ void usage() {
     exit(1); 
 }
 
-extern int getopt (int argc, char **argv, char *optstring);
+/*extern int getopt (int argc, char **argv, char *optstring);*/
 extern char *optarg;
 extern int optind;
 
