@@ -101,35 +101,29 @@
 - (void)drawWebView
 {
 	// write man text to tmp document
-	NSFileManager *fm = [NSFileManager defaultManager];
-	NSURL *tmpUrl = [fm URLForDirectory: NSItemReplacementDirectory inDomain:NSUserDomainMask appropriateForURL:[NSURL fileURLWithPath:@"Generating an HTML preview"] create:YES error:NULL];
-	NSURL *tmpManFile, *tmpHTMLFile;
 	NSTask *task = [[NSTask alloc] init];
-	NSPipe *pipe = [[NSPipe alloc] init];
-	if (tmpUrl) {
-		tmpManFile = [tmpUrl URLByAppendingPathComponent:@"ManDrakeTemp"];
-	} else {
-		// in case the call to URLForDirectory failed for whatever reason
-		tmpUrl = [NSURL fileURLWithPath:NSTemporaryDirectory()];
-		tmpManFile = [tmpUrl URLByAppendingPathComponent:@"ManDrakeTemp"];
-	}
-	tmpHTMLFile = [tmpManFile URLByAppendingPathExtension:@"html"];
-	tmpManFile = [tmpManFile URLByAppendingPathExtension:@"manText"];
-	[textView.string writeToURL:tmpManFile atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+	NSPipe *pipe = [NSPipe pipe];
+	NSPipe *inPipe = [NSPipe pipe];
+	NSData *rawData = [textView.string dataUsingEncoding:NSUTF8StringEncoding];
 	
 	// generate commands to create html from man text using nroff and cat2html
 	task.launchPath = @"/usr/bin/nroff";
-	task.arguments = @[@"-mandoc", tmpManFile.path];
+	task.arguments = @[@"-mandoc"];
+	task.standardInput = inPipe;
 	task.standardOutput = pipe;
 	task.standardError = [NSFileHandle fileHandleWithNullDevice];
 	// run the command
 	[task launch];
+	[[inPipe fileHandleForWriting] writeData:rawData];
+	[[inPipe fileHandleForWriting] closeFile];
+	
 	[task waitUntilExit];
+	
 	// get the file handle from nroff's output.
 	NSFileHandle *fd = pipe.fileHandleForReading;
 	
 	// create new pipe for cat2html's output
-	pipe = [[NSPipe alloc] init];
+	pipe = [NSPipe pipe];
 	//Create new task object
 	task = [[NSTask alloc] init];
 	task.launchPath = [[NSBundle mainBundle] pathForResource: @"cat2html" ofType: NULL];
@@ -141,17 +135,14 @@
 	[task waitUntilExit];
 
 	NSData *htmlData = [pipe.fileHandleForReading readDataToEndOfFile];
-	[htmlData writeToURL:tmpHTMLFile atomically:YES];
 	
 	// get the current scroll position of the document view of the web view
 	NSScrollView *theScrollView = [[[[webView mainFrame] frameView] documentView] enclosingScrollView];
 	NSRect scrollViewBounds = [[theScrollView contentView] bounds];
 	currentScrollPosition=scrollViewBounds.origin; 	
 
-	// tell the web view to load the generated, local html file
-	[[webView mainFrame] loadRequest: [NSURLRequest requestWithURL: tmpHTMLFile]];
-	
-	//TODO: clean-up, just in case
+	// tell the web view to load the generated data
+	[webView.mainFrame loadData:htmlData MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
 }
 
 // delegate method we receive when it's done loading the html file. 
