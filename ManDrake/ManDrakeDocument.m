@@ -67,9 +67,7 @@
 - (IBAction)refresh:(id)sender
 {	
 	// generate preview
-	[refreshProgressIndicator startAnimation: self];
 	[self drawWebView];
-	[refreshProgressIndicator stopAnimation: self];
 }
 
 - (IBAction)refreshChanged:(id)sender
@@ -104,6 +102,7 @@
 
 - (void)drawWebView
 {
+	[refreshProgressIndicator startAnimation: self];
 	// write man text to tmp document
 	NSTask *task = [[NSTask alloc] init];
 	NSPipe *inPipe = [NSPipe pipe];
@@ -122,7 +121,7 @@
 	[[inPipe fileHandleForWriting] closeFile];
 	
 	dispatch_async(dispatch_get_global_queue(0, 0), ^{
-		if (dispatch_semaphore_wait(webViewSemaphore, dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC / 2)) < 0) {
+		if (dispatch_semaphore_wait(webViewSemaphore, dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC / 3)) < 0) {
 			return;
 		}
 
@@ -153,7 +152,9 @@
 			
 			// tell the web view to load the generated data
 			[webView.mainFrame loadData:htmlData MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
-
+			
+			[refreshProgressIndicator stopAnimation: self];
+			
 			dispatch_semaphore_signal(webViewSemaphore);
 		});
 	});
