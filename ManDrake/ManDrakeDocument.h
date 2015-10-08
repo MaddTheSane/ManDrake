@@ -26,11 +26,11 @@
 #import "NoodleLineNumberView.h"
 #import "MarkerLineNumberView.h"
 
-@interface ManDrakeDocument : UKSyntaxColoredTextDocument
+@interface ManDrakeDocument : UKSyntaxColoredTextDocument <WebDownloadDelegate, WebFrameLoadDelegate, WebUIDelegate, WebResourceLoadDelegate, NSTextViewDelegate, WebPolicyDelegate, UKSyntaxColoredTextViewDelegate>
 {
-	IBOutlet WebView		*webView;
-	IBOutlet id				refreshTypePopupButton;
-	IBOutlet id				refreshProgressIndicator;
+	IBOutlet WebView				*webView;
+	IBOutlet NSPopUpButton			*refreshTypePopupButton;
+	IBOutlet NSProgressIndicator	*refreshProgressIndicator;
 	
 	IBOutlet NSScrollView   *scrollView;
 	NoodleLineNumberView	*lineNumberView;

@@ -38,8 +38,7 @@
 + (void)initialize
 {
     // create and register the user defaults here if none exists
-    NSMutableDictionary *defaultPrefs = [NSMutableDictionary dictionary];
-	defaultPrefs[@"Refresh"] = @"delayed";
+	NSDictionary *defaultPrefs = @{@"Refresh": @"delayed"};
     [[NSUserDefaults standardUserDefaults] registerDefaults: defaultPrefs];
 }
 

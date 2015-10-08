@@ -102,7 +102,7 @@
 		F487F4F9141EAEAC0093D633 /* UKSyntaxColoredTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKSyntaxColoredTextViewController.m; sourceTree = "<group>"; };
 		F487F4FA141EAEAC0093D633 /* UKTextDocGotoBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKTextDocGotoBox.h; sourceTree = "<group>"; };
 		F487F4FB141EAEAC0093D633 /* UKTextDocGoToBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKTextDocGoToBox.m; sourceTree = "<group>"; };
-		F487F505141EAF8A0093D633 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
+		F487F505141EAF8A0093D633 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		F487F533141EB2560093D633 /* ManDrakeApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManDrakeApplicationDelegate.h; sourceTree = "<group>"; };
 		F487F534141EB2560093D633 /* ManDrakeApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManDrakeApplicationDelegate.m; sourceTree = "<group>"; };
 		F487F53A141EDD560093D633 /* cat2html.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; lineEnding = 0; path = cat2html.l; sourceTree = "<group>"; usesTabs = 0; };
@@ -182,7 +182,6 @@
 				F487F538141EDD560093D633 /* cat2html */,
 				F487F4E9141EAEAC0093D633 /* UKSyntaxColoredTextDocument */,
 				F487F4DF141EAEA10093D633 /* LineNumbering */,
-				5587229F1BC70548008CACAF /* Images.xcassets */,
 			);
 			path = ManDrake;
 			sourceTree = "<group>";
@@ -190,6 +189,7 @@
 		F487F4B2141EADEF0093D633 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5587229F1BC70548008CACAF /* Images.xcassets */,
 				F487F4D0141EAE730093D633 /* MainMenu.xib */,
 				F487F4D1141EAE730093D633 /* ManDrakeDocument.xib */,
 				F487F4B3141EADEF0093D633 /* ManDrake-Info.plist */,
@@ -534,6 +534,7 @@
 				558722991BC70014008CACAF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F487F4A1141EADEF0093D633 /* Build configuration list for PBXProject "ManDrake" */ = {
 			isa = XCConfigurationList;
