@@ -24,12 +24,16 @@
 #import "UKSyntaxColoredTextViewController.H"
 
 @implementation ManDrakeDocument
+{
+	dispatch_semaphore_t webViewSemaphore;
+}
 
 - (instancetype)init
 {
     if (self = [super init]) 
 	{
 		refreshTimer = NULL;
+		webViewSemaphore = dispatch_semaphore_create(0);
     }
     return self;
 }
@@ -102,47 +106,57 @@
 {
 	// write man text to tmp document
 	NSTask *task = [[NSTask alloc] init];
-	NSPipe *pipe = [NSPipe pipe];
 	NSPipe *inPipe = [NSPipe pipe];
+	NSPipe *outPipe = [NSPipe pipe];
 	NSData *rawData = [textView.string dataUsingEncoding:NSUTF8StringEncoding];
 	
 	// generate commands to create html from man text using nroff and cat2html
 	task.launchPath = @"/usr/bin/nroff";
 	task.arguments = @[@"-mandoc"];
 	task.standardInput = inPipe;
-	task.standardOutput = pipe;
+	task.standardOutput = outPipe;
 	task.standardError = [NSFileHandle fileHandleWithNullDevice];
 	// run the command
 	[task launch];
 	[[inPipe fileHandleForWriting] writeData:rawData];
 	[[inPipe fileHandleForWriting] closeFile];
 	
-	[task waitUntilExit];
-	
-	// get the file handle from nroff's output.
-	NSFileHandle *fd = pipe.fileHandleForReading;
-	
-	// create new pipe for cat2html's output
-	pipe = [NSPipe pipe];
-	//Create new task object
-	task = [[NSTask alloc] init];
-	task.launchPath = [[NSBundle mainBundle] pathForResource: @"cat2html" ofType: NULL];
-	task.standardInput = fd;
-	task.standardOutput = pipe;
-	task.standardError = [NSFileHandle fileHandleWithNullDevice];
-	// run the command
-	[task launch];
-	[task waitUntilExit];
+	dispatch_async(dispatch_get_global_queue(0, 0), ^{
+		if (dispatch_semaphore_wait(webViewSemaphore, dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC / 2)) < 0) {
+			return;
+		}
 
-	NSData *htmlData = [pipe.fileHandleForReading readDataToEndOfFile];
-	
-	// get the current scroll position of the document view of the web view
-	NSScrollView *theScrollView = [[[[webView mainFrame] frameView] documentView] enclosingScrollView];
-	NSRect scrollViewBounds = [[theScrollView contentView] bounds];
-	currentScrollPosition=scrollViewBounds.origin; 	
+		[task waitUntilExit];
+		
+		// get the file handle from nroff's output.
+		NSFileHandle *fd = outPipe.fileHandleForReading;
+		
+		// create new pipe for cat2html's output
+		NSPipe *pipe = [NSPipe pipe];
+		//Create new task object
+		NSTask *c2Htask = [[NSTask alloc] init];
+		c2Htask.launchPath = [[NSBundle mainBundle] pathForResource: @"cat2html" ofType: NULL];
+		c2Htask.standardInput = fd;
+		c2Htask.standardOutput = pipe;
+		c2Htask.standardError = [NSFileHandle fileHandleWithNullDevice];
+		// run the command
+		[c2Htask launch];
+		[c2Htask waitUntilExit];
+		
+		NSData *htmlData = [pipe.fileHandleForReading readDataToEndOfFile];
 
-	// tell the web view to load the generated data
-	[webView.mainFrame loadData:htmlData MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			// get the current scroll position of the document view of the web view
+			NSScrollView *theScrollView = [[[[webView mainFrame] frameView] documentView] enclosingScrollView];
+			NSRect scrollViewBounds = [[theScrollView contentView] bounds];
+			currentScrollPosition=scrollViewBounds.origin;
+			
+			// tell the web view to load the generated data
+			[webView.mainFrame loadData:htmlData MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
+
+			dispatch_semaphore_signal(webViewSemaphore);
+		});
+	});
 }
 
 // delegate method we receive when it's done loading the html file. 
