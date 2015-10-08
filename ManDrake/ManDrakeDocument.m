@@ -101,15 +101,47 @@
 - (void)drawWebView
 {
 	// write man text to tmp document
-	[[textView string] writeToFile: @"/tmp/ManDrakeTemp.manText" atomically: YES encoding: NSUTF8StringEncoding error: NULL];
-
-	// generate command string to create html from man text using nroff and cat2html
-	NSString *cmdString = [NSString stringWithFormat: @"/usr/bin/nroff -mandoc /tmp/ManDrakeTemp.manText | %@ > /tmp/ManDrakeTemp.html", 
-						   [[NSBundle mainBundle] pathForResource: @"cat2html" ofType: NULL]
-						   ];
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSURL *tmpUrl = [fm URLForDirectory: NSItemReplacementDirectory inDomain:NSUserDomainMask appropriateForURL:[NSURL fileURLWithPath:@"Generating an HTML preview"] create:YES error:NULL];
+	NSURL *tmpManFile, *tmpHTMLFile;
+	NSTask *task = [[NSTask alloc] init];
+	NSPipe *pipe = [[NSPipe alloc] init];
+	if (tmpUrl) {
+		tmpManFile = [tmpUrl URLByAppendingPathComponent:@"ManDrakeTemp"];
+	} else {
+		// in case the call to URLForDirectory failed for whatever reason
+		tmpUrl = [NSURL fileURLWithPath:NSTemporaryDirectory()];
+		tmpManFile = [tmpUrl URLByAppendingPathComponent:@"ManDrakeTemp"];
+	}
+	tmpHTMLFile = [tmpManFile URLByAppendingPathExtension:@"html"];
+	tmpManFile = [tmpManFile URLByAppendingPathExtension:@"manText"];
+	[textView.string writeToURL:tmpManFile atomically:YES encoding:NSUTF8StringEncoding error:NULL];
 	
+	// generate commands to create html from man text using nroff and cat2html
+	task.launchPath = @"/usr/bin/nroff";
+	task.arguments = @[@"-mandoc", tmpManFile.path];
+	task.standardOutput = pipe;
+	task.standardError = [NSFileHandle fileHandleWithNullDevice];
 	// run the command
-	system([cmdString cStringUsingEncoding: NSUTF8StringEncoding]);
+	[task launch];
+	[task waitUntilExit];
+	// get the file handle from nroff's output.
+	NSFileHandle *fd = pipe.fileHandleForReading;
+	
+	// create new pipe for cat2html's output
+	pipe = [[NSPipe alloc] init];
+	//Create new task object
+	task = [[NSTask alloc] init];
+	task.launchPath = [[NSBundle mainBundle] pathForResource: @"cat2html" ofType: NULL];
+	task.standardInput = fd;
+	task.standardOutput = pipe;
+	task.standardError = [NSFileHandle fileHandleWithNullDevice];
+	// run the command
+	[task launch];
+	[task waitUntilExit];
+
+	NSData *htmlData = [pipe.fileHandleForReading readDataToEndOfFile];
+	[htmlData writeToURL:tmpHTMLFile atomically:YES];
 	
 	// get the current scroll position of the document view of the web view
 	NSScrollView *theScrollView = [[[[webView mainFrame] frameView] documentView] enclosingScrollView];
@@ -117,8 +149,9 @@
 	currentScrollPosition=scrollViewBounds.origin; 	
 
 	// tell the web view to load the generated, local html file
-	[[webView mainFrame] loadRequest: [NSURLRequest requestWithURL: [NSURL fileURLWithPath: @"/tmp/ManDrakeTemp.html"]]];
+	[[webView mainFrame] loadRequest: [NSURLRequest requestWithURL: tmpHTMLFile]];
 	
+	//TODO: clean-up, just in case
 }
 
 // delegate method we receive when it's done loading the html file. 
