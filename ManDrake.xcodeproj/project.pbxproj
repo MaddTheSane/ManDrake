@@ -10,6 +10,7 @@
 		3D6AE8901B40973500CD192D /* NSNumber+JXCGFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6AE88F1B40973500CD192D /* NSNumber+JXCGFloat.m */; };
 		5587229B1BC70032008CACAF /* cat2html.l in Sources */ = {isa = PBXBuildFile; fileRef = F487F53A141EDD560093D633 /* cat2html.l */; settings = {ASSET_TAGS = (); }; };
 		5587229E1BC70055008CACAF /* cat2html in Resources */ = {isa = PBXBuildFile; fileRef = 558722941BC70014008CACAF /* cat2html */; };
+		558722A01BC70548008CACAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5587229F1BC70548008CACAF /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		F487F4AC141EADEF0093D633 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F487F4AB141EADEF0093D633 /* Cocoa.framework */; };
 		F487F4B8141EADEF0093D633 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F487F4B7141EADEF0093D633 /* main.m */; };
 		F487F4BF141EADEF0093D633 /* ManDrakeDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = F487F4BE141EADEF0093D633 /* ManDrakeDocument.m */; };
@@ -33,7 +34,6 @@
 		F487F504141EAEAC0093D633 /* UKTextDocGoToBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F487F4FB141EAEAC0093D633 /* UKTextDocGoToBox.m */; };
 		F487F506141EAF8A0093D633 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F487F505141EAF8A0093D633 /* WebKit.framework */; };
 		F487F535141EB2560093D633 /* ManDrakeApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F487F534141EB2560093D633 /* ManDrakeApplicationDelegate.m */; };
-		F487F544141EDE590093D633 /* ManDocument.icns in Resources */ = {isa = PBXBuildFile; fileRef = F487F543141EDE590093D633 /* ManDocument.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +62,7 @@
 		3D6AE88E1B40973500CD192D /* NSNumber+JXCGFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+JXCGFloat.h"; sourceTree = "<group>"; };
 		3D6AE88F1B40973500CD192D /* NSNumber+JXCGFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+JXCGFloat.m"; sourceTree = "<group>"; };
 		558722941BC70014008CACAF /* cat2html */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cat2html; sourceTree = BUILT_PRODUCTS_DIR; };
+		5587229F1BC70548008CACAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F487F4A7141EADEF0093D633 /* ManDrake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManDrake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F487F4AB141EADEF0093D633 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F487F4AE141EADEF0093D633 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -105,7 +106,6 @@
 		F487F533141EB2560093D633 /* ManDrakeApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManDrakeApplicationDelegate.h; sourceTree = "<group>"; };
 		F487F534141EB2560093D633 /* ManDrakeApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManDrakeApplicationDelegate.m; sourceTree = "<group>"; };
 		F487F53A141EDD560093D633 /* cat2html.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; lineEnding = 0; path = cat2html.l; sourceTree = "<group>"; usesTabs = 0; };
-		F487F543141EDE590093D633 /* ManDocument.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = ManDocument.icns; path = Resources/ManDocument.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +182,7 @@
 				F487F538141EDD560093D633 /* cat2html */,
 				F487F4E9141EAEAC0093D633 /* UKSyntaxColoredTextDocument */,
 				F487F4DF141EAEA10093D633 /* LineNumbering */,
+				5587229F1BC70548008CACAF /* Images.xcassets */,
 			);
 			path = ManDrake;
 			sourceTree = "<group>";
@@ -192,7 +193,6 @@
 				F487F4D0141EAE730093D633 /* MainMenu.xib */,
 				F487F4D1141EAE730093D633 /* ManDrakeDocument.xib */,
 				F487F4B3141EADEF0093D633 /* ManDrake-Info.plist */,
-				F487F543141EDE590093D633 /* ManDocument.icns */,
 				F487F4D5141EAE910093D633 /* Credits.rtf */,
 				F487F4D6141EAE910093D633 /* Syntax Definitions */,
 				F487F4D8141EAE910093D633 /* SyntaxColorDefaults.plist */,
@@ -331,6 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558722A01BC70548008CACAF /* Images.xcassets in Resources */,
 				5587229E1BC70055008CACAF /* cat2html in Resources */,
 				F487F4D2141EAE730093D633 /* MainMenu.xib in Resources */,
 				F487F4D3141EAE730093D633 /* ManDrakeDocument.xib in Resources */,
@@ -338,7 +339,6 @@
 				F487F4DC141EAE910093D633 /* Man.plist in Resources */,
 				F487F4DD141EAE910093D633 /* SyntaxColorDefaults.plist in Resources */,
 				F487F4DE141EAE910093D633 /* SyntaxDefinition.plist in Resources */,
-				F487F544141EDE590093D633 /* ManDocument.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +495,7 @@
 		F487F4C9141EADEF0093D633 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -510,6 +511,7 @@
 		F487F4CA141EADEF0093D633 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
