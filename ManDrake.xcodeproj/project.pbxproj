@@ -11,6 +11,7 @@
 		5587229B1BC70032008CACAF /* cat2html.l in Sources */ = {isa = PBXBuildFile; fileRef = F487F53A141EDD560093D633 /* cat2html.l */; settings = {ASSET_TAGS = (); }; };
 		5587229E1BC70055008CACAF /* cat2html in Resources */ = {isa = PBXBuildFile; fileRef = 558722941BC70014008CACAF /* cat2html */; };
 		558722A01BC70548008CACAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5587229F1BC70548008CACAF /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		55D64E6A1BC731050072EC54 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55D64E6C1BC731050072EC54 /* InfoPlist.strings */; };
 		F487F4AC141EADEF0093D633 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F487F4AB141EADEF0093D633 /* Cocoa.framework */; };
 		F487F4B8141EADEF0093D633 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F487F4B7141EADEF0093D633 /* main.m */; };
 		F487F4BF141EADEF0093D633 /* ManDrakeDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = F487F4BE141EADEF0093D633 /* ManDrakeDocument.m */; };
@@ -62,22 +63,23 @@
 		3D6AE88E1B40973500CD192D /* NSNumber+JXCGFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+JXCGFloat.h"; sourceTree = "<group>"; };
 		3D6AE88F1B40973500CD192D /* NSNumber+JXCGFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+JXCGFloat.m"; sourceTree = "<group>"; };
 		558722941BC70014008CACAF /* cat2html */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cat2html; sourceTree = BUILT_PRODUCTS_DIR; };
-		5587229F1BC70548008CACAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5587229F1BC70548008CACAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
+		55D64E6B1BC731050072EC54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F487F4A7141EADEF0093D633 /* ManDrake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManDrake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F487F4AB141EADEF0093D633 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F487F4AE141EADEF0093D633 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		F487F4B0141EADEF0093D633 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		F487F4B3141EADEF0093D633 /* ManDrake-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ManDrake-Info.plist"; sourceTree = "<group>"; };
+		F487F4B3141EADEF0093D633 /* ManDrake-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ManDrake-Info.plist"; path = "../ManDrake-Info.plist"; sourceTree = "<group>"; };
 		F487F4B7141EADEF0093D633 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F487F4B9141EADEF0093D633 /* ManDrake-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ManDrake-Prefix.pch"; sourceTree = "<group>"; };
 		F487F4BD141EADEF0093D633 /* ManDrakeDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManDrakeDocument.h; sourceTree = "<group>"; };
 		F487F4BE141EADEF0093D633 /* ManDrakeDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManDrakeDocument.m; sourceTree = "<group>"; };
-		F487F4D0141EAE730093D633 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Resources/MainMenu.xib; sourceTree = "<group>"; };
-		F487F4D1141EAE730093D633 /* ManDrakeDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ManDrakeDocument.xib; path = Resources/ManDrakeDocument.xib; sourceTree = "<group>"; };
-		F487F4D5141EAE910093D633 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = Credits.rtf; path = Resources/Credits.rtf; sourceTree = "<group>"; };
+		F487F4D0141EAE730093D633 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		F487F4D1141EAE730093D633 /* ManDrakeDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ManDrakeDocument.xib; sourceTree = "<group>"; };
+		F487F4D5141EAE910093D633 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		F487F4D7141EAE910093D633 /* Man.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Man.plist; sourceTree = "<group>"; };
-		F487F4D8141EAE910093D633 /* SyntaxColorDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SyntaxColorDefaults.plist; path = Resources/SyntaxColorDefaults.plist; sourceTree = "<group>"; };
-		F487F4D9141EAE910093D633 /* SyntaxDefinition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SyntaxDefinition.plist; path = Resources/SyntaxDefinition.plist; sourceTree = "<group>"; };
+		F487F4D8141EAE910093D633 /* SyntaxColorDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SyntaxColorDefaults.plist; sourceTree = "<group>"; };
+		F487F4D9141EAE910093D633 /* SyntaxDefinition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SyntaxDefinition.plist; sourceTree = "<group>"; };
 		F487F4E0141EAEA10093D633 /* MarkerLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerLineNumberView.h; sourceTree = "<group>"; };
 		F487F4E1141EAEA10093D633 /* MarkerLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkerLineNumberView.m; sourceTree = "<group>"; };
 		F487F4E2141EAEA10093D633 /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberMarker.h; sourceTree = "<group>"; };
@@ -144,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				F487F4B1141EADEF0093D633 /* ManDrake */,
-				F487F4B2141EADEF0093D633 /* Resources */,
 				F487F4AA141EADEF0093D633 /* Frameworks */,
 				F487F4A8141EADEF0093D633 /* Products */,
 			);
@@ -182,6 +183,7 @@
 				F487F538141EDD560093D633 /* cat2html */,
 				F487F4E9141EAEAC0093D633 /* UKSyntaxColoredTextDocument */,
 				F487F4DF141EAEA10093D633 /* LineNumbering */,
+				F487F4B2141EADEF0093D633 /* Resources */,
 			);
 			path = ManDrake;
 			sourceTree = "<group>";
@@ -192,14 +194,14 @@
 				5587229F1BC70548008CACAF /* Images.xcassets */,
 				F487F4D0141EAE730093D633 /* MainMenu.xib */,
 				F487F4D1141EAE730093D633 /* ManDrakeDocument.xib */,
+				55D64E6C1BC731050072EC54 /* InfoPlist.strings */,
 				F487F4B3141EADEF0093D633 /* ManDrake-Info.plist */,
 				F487F4D5141EAE910093D633 /* Credits.rtf */,
 				F487F4D6141EAE910093D633 /* Syntax Definitions */,
 				F487F4D8141EAE910093D633 /* SyntaxColorDefaults.plist */,
 				F487F4D9141EAE910093D633 /* SyntaxDefinition.plist */,
 			);
-			name = Resources;
-			path = ManDrake;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		F487F4D6141EAE910093D633 /* Syntax Definitions */ = {
@@ -207,8 +209,7 @@
 			children = (
 				F487F4D7141EAE910093D633 /* Man.plist */,
 			);
-			name = "Syntax Definitions";
-			path = "Resources/Syntax Definitions";
+			path = "Syntax Definitions";
 			sourceTree = "<group>";
 		};
 		F487F4DF141EAEA10093D633 /* LineNumbering */ = {
@@ -338,6 +339,7 @@
 				F487F4DB141EAE910093D633 /* Credits.rtf in Resources */,
 				F487F4DC141EAE910093D633 /* Man.plist in Resources */,
 				F487F4DD141EAE910093D633 /* SyntaxColorDefaults.plist in Resources */,
+				55D64E6A1BC731050072EC54 /* InfoPlist.strings in Resources */,
 				F487F4DE141EAE910093D633 /* SyntaxDefinition.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,6 +387,17 @@
 			targetProxy = 5587229C1BC7004D008CACAF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		55D64E6C1BC731050072EC54 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55D64E6B1BC731050072EC54 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		558722981BC70014008CACAF /* Debug */ = {

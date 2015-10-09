@@ -24,7 +24,7 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>ManDocument.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>DocumentType</string>
+			<string>mandoc</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>NSDocumentClass</key>
